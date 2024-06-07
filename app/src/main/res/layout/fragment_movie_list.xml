@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="movieViewModel"
+            type="com.dreamworks.webteer.screens.main.MovieViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".screens.movie.MovieListFragment">
+
+        <androidx.constraintlayout.helper.widget.Flow
+            android:id="@+id/flow"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="genreTextInputLayout,genre"
+            app:flow_maxElementsWrap="1"
+            app:flow_verticalGap="10dp"
+            app:flow_wrapMode="chain"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/end"
+            app:layout_constraintStart_toStartOf="@+id/start"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias=".1" />
+
+
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/genreTextInputLayout"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            app:errorEnabled="false"
+            app:hintEnabled="false"
+            tools:ignore="MissingConstraints">
+
+            <!-- Inside text input layout add
+                  an auto complete text view
+                    and make its input type to none-->
+            <AutoCompleteTextView
+                android:id="@+id/genreAutoCompleteTextView"
+                currentGenre="@{(value) -> movieViewModel.onGenreSelected(value.toString())}"
+                setGenre="@{movieViewModel.genreList}"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/curved_box"
+                android:ellipsize="end"
+                android:imeOptions="actionNext"
+                android:inputType="none"
+                android:maxLines="1"
+                android:popupBackground="@drawable/black_curve_filled_box"
+                android:singleLine="true"
+                android:text="@string/select_genre"
+                android:textSize="14sp"
+                tools:ignore="LabelFor" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/genre"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:text="@{movieViewModel.showList}"
+             />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/movieList"
+            android:layout_width="0dp"
+            app:layout_constraintVertical_bias="0"
+            android:layout_height="0dp"
+            android:requiresFadingEdge="vertical"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/end"
+            app:layout_constraintStart_toStartOf="@+id/start"
+            app:layout_constraintTop_toBottomOf="@+id/genre" />
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/horizontal_movie_guideline_param" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/horizontal_movie_guideline_param" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/loaderContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#C81C1C1C"
+            android:clickable="true"
+            android:elevation="10dp"
+            android:focusable="true"
+            android:visibility="@{movieViewModel.loader}">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/loader"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/wheel"
+                app:lottie_speed="1" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+

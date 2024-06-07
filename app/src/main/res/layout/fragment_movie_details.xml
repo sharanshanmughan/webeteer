@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="movieDetailViewModel"
+            type="com.dreamworks.webteer.screens.movieDetails.MovieDetailsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".screens.movieDetails.MovieDetailsFragment">
+
+        <ImageView
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:scaleType="centerCrop"
+            setImage="@{movieDetailViewModel.moviePoster}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/imageBottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="banner" />
+
+        <View
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="-20dp"
+            android:background="@drawable/top_curve_box"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/banner" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/end"
+            app:layout_constraintStart_toStartOf="@+id/start"
+            app:layout_constraintTop_toBottomOf="@+id/banner">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.helper.widget.Flow
+                    android:id="@+id/flow2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:constraint_referenced_ids="poster,divider,description"
+                    app:flow_horizontalBias="0"
+                    app:flow_maxElementsWrap="1"
+                    app:flow_verticalGap="10dp"
+                    app:flow_wrapMode="chain"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <ImageView
+                    android:id="@+id/poster"
+                    android:layout_width="100dp"
+                    android:layout_height="150dp"
+                    android:scaleType="centerCrop"
+
+                    setImage="@{movieDetailViewModel.moviePoster}"
+                    />
+                <androidx.constraintlayout.widget.Barrier
+                    android:id="@+id/barrier1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:barrierDirection="end"
+                    app:constraint_referenced_ids="poster" />
+
+                <androidx.constraintlayout.helper.widget.Flow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    app:flow_maxElementsWrap="1"
+                    app:flow_wrapMode="chain"
+                    app:flow_horizontalBias="0"
+                    app:layout_constraintVertical_bias="1"
+                    app:constraint_referenced_ids="movieName,genre,year,yearBottom,rating"
+                    app:layout_constraintBottom_toBottomOf="@+id/poster"
+                    app:layout_constraintStart_toEndOf="@+id/poster"
+                    app:layout_constraintTop_toTopOf="@+id/poster" />
+
+                <TextView
+                    android:id="@+id/movieName"
+                    android:textSize="16sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="@{movieDetailViewModel.movieName}"/>
+                <TextView
+                    android:id="@+id/genre"
+                    android:textSize="12sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="@{movieDetailViewModel.movieGenre}"/>
+                <TextView
+                    android:id="@+id/year"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="@{movieDetailViewModel.movieYear}"/>
+                <View
+                    android:id="@+id/yearBottom"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"/>
+                <RatingBar
+                    android:id="@+id/rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:numStars="9"
+                    android:stepSize="0.1"
+                    setRating="@{movieDetailViewModel.movieRating}"
+                    android:progressTint="#F5BE17"
+                    android:isIndicator="true" />
+
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="match_parent"
+                    android:layout_height=".5dp"
+                    android:background="@android:color/darker_gray"/>
+
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="@{movieDetailViewModel.movieDescription}"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="20dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="20dp" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
+

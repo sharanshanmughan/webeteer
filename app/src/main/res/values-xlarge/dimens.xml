@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="vertical_guideline_param">400dp</dimen>
+    <dimen name="horizontal_movie_guideline_param">150dp</dimen>
+    <dimen name="horizontal_profile_guideline_param">105dp</dimen>
+</resources>
