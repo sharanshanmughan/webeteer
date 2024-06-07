@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.dreamworks.webteer.R
 import com.dreamworks.webteer.databinding.FragmentMovieDetailsBinding
 import com.dreamworks.webteer.screens.main.MovieViewModel
@@ -27,6 +28,7 @@ class MovieDetailsFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_movie_details,container,false)
 
+
         binding.movieDetailViewModel = movieDetailsViewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
@@ -37,6 +39,10 @@ class MovieDetailsFragment : Fragment() {
             movieDetailsViewModel.formatDate(it.release)
             movieDetailsViewModel.movieRating.value = it.rating.toFloat()
             movieDetailsViewModel.movieDescription.value = it.desc
+        }
+
+        binding.backButton.setOnClickListener {
+            findNavController().popBackStack()
         }
 
 

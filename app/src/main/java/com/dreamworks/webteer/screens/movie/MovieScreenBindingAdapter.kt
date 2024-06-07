@@ -4,7 +4,12 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
+import coil.ImageLoader
+import coil.disk.DiskCache
 import coil.load
+import coil.request.CachePolicy
+import coil.request.ImageRequest
+import coil.size.Size
 import com.dreamworks.webteer.R
 
 @BindingAdapter("setGenre")
@@ -25,6 +30,7 @@ fun setGenreListener(autoCompleteTextView: AutoCompleteTextView,listener:((Strin
 
 @BindingAdapter("setImage")
 fun setImage(imageView: ImageView,url:String){
+
     imageView.load(url){
         crossfade(true)
         placeholder(R.drawable.loading)
